@@ -10,7 +10,7 @@
   <body>
     <div class="container mt-5"> <div class="row">
             <div class="col-md-6 offset-md-3"> <h1 class="mb-4">Cadastro</h1>
-                <form>
+                <form action="cadastro_script.php" method="POST">
                     <div class="mb-3">
                         <label for="nome" class="form-label">Nome completo</label>
                         <input type="text" class="form-control" name="nome" id="nome">
