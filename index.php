@@ -23,17 +23,17 @@
 
                     <div class="mb-3">
                         <label for="telefone" class="form-label">Telefone</label>
-                        <input type="text" class="form-control" name="telefone" id="telefone">
+                        <input type="text" class="form-control" name="telefone">
                     </div>
 
                     <div class="mb-3">
                         <label for="email" class="form-label">E-mail</label>
-                        <input type="email" class="form-control" name="email" id="email">
+                        <input type="email" class="form-control" name="email">
                     </div>
 
                     <div class="mb-3">
                         <label for="dt_nascimento" class="form-label">Data de nascimento</label>
-                        <input type="date" class="form-control" name="dt_nascimento" id="dt_nascimento">
+                        <input type="date" class="form-control" name="data+nascimento">
                     </div>
 
                     <div class="mb-3">
