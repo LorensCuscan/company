@@ -1,4 +1,4 @@
-<html lang="en" dir="rtl">
+<html lang="en" dir="ltr">
   <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -13,23 +13,31 @@
         <div class="row">
             <div class="col">
                 <h1>Cadastro</h1>
-                <form>
-  <div class="mb-3">
-    <label for="Nome" class="form-label">Nome completo</label>
-    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-  </div>
-  <div class="mb-3">
-    <label for="exampleInputPassword1" class="form-label">Password</label>
-    <input type="password" class="form-control" id="exampleInputPassword1">
-  </div>
-  <div class="mb-3 form-check">
-    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-    <label class="form-check-label" for="exampleCheck1">Check me out</label>
-  </div>
-  <button type="submit" class="btn btn-primary">Submit</button>
-            </div>
-        </div>
+                    <form>
+                        <div class="mb-3">
+                        <label for="Nome" class="form-label">Nome completo</label>
+                        <input type="text" class="form-control" name="nome">
+                        </div>
+                        <div class="mb-3">
+                        <label for="endereco">Endereço</label>
+                        <input type="text" class="form-control" name="endereco">
+                        </div>
+                        <div class="mb-3">
+                        <label for="endereco">Telefone</label>
+                        <input type="text" class="form-control" name="telefone">
+                        </div>
+                        <div class="mb-3">
+                        <label for="email">E-mail</label>
+                        <input type="text" class="form-control" name="telefone">
+                        </div>
+                        <div class="mb-3">
+                        <label for="telefone">Data de nascimento</label>
+                        <input type="date" class="form-control" name="dt_nascimento">
+                        </div>
+                        <div class="mb-3">
+                        <input type="submit" class="btn=success">
+                        </div>
+                    </form>
 
     <!-- Optional JavaScript; choose one of the two! -->
 
