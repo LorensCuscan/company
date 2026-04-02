@@ -40,6 +40,7 @@
                         <input type="submit" class="btn btn-success w-100" value="Cadastrar">
                     </div>
                 </form>
+                <a href="index.php" class="btn btn-success w-100">Inicio</a>
             </div>
         </div>
     </div>
