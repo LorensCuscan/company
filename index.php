@@ -11,12 +11,13 @@
     <div class="container mt-5"> <div class="row">
             <div class="col-md-6 offset-md-3"> <h1 class="mb-4">Cadastro</h1>
               <div class="jumbotron">
-            <h1 class="display-4">Hello, world!</h1>
+            <h1 class="display-4">Cadastro Web</h1>
             <p class="lead"></p>
             <hr class="my-4">
-            <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+            <p>Este é um sistema simplificado de cadastros. Base de estudos para criação de sistemas web com PHP e MySQl</p>
             <p class="lead">
-                <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+                <a class="btn btn-primary btn-lg" href="cadastro.php" role="button">Cadastro</a>
+                <a class="btn btn-primary btn-lg" href="cadastro.php" role="button">Pesquisar</a>
             </p>
             </div>
             </div>
