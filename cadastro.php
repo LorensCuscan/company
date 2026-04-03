@@ -12,6 +12,26 @@
         <?php 
             include "conexao.php";
 
+            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $nome = $_POST['nome'] ?? ''; 
+    $endereco = $_POST['endereco'] ?? '';   
+    $telefone = $_POST['telefone'] ?? '';  
+    $email = $_POST['email'] ?? '';   
+    $data_nascimento = $_POST['data_nascimento'] ?? ''; 
+
+    $sql = "INSERT INTO `pessoas`(`nome`, `endereco`, `telefone`, `email`, `data_nascimento`) 
+            VALUES ('$nome', '$endereco', '$telefone', '$email', '$data_nascimento')";
+
+    if (mysqli_query($conn, $sql)) {
+        echo "Cadastrado com sucesso!";
+    }
+} else {
+    echo "Por favor, preencha o formulário primeiro.";
+}
+?>
+
+            
+
             // 1. Pegando os dados do formulário
             $nome = $_POST['nome']; 
             $endereco = $_POST['endereco'];   
