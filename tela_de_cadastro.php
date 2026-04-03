@@ -40,6 +40,7 @@
                         <button type="submit" class="btn btn-outline-secondary ms-2">Finalizar Cadastro</button>                      
                         <a href="index.php" class="btn btn-outline-secondary ms-2">Voltar para o Início</a>
                     </div>
+                </form>
             </div>
         </div>
     </div>
