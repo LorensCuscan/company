@@ -17,7 +17,7 @@
             <p>Este é um sistema simplificado de cadastros. Base de estudos para criação de sistemas web com PHP e MySQl</p>
             <p class="lead">
                 <a class="btn btn-primary btn-lg" href="tela_de_cadastro.php" role="button">Ir para Cadastro</a>
-                <a class="btn btn-primary btn-lg" href="pesquisar.php" role="button">Pesquisar</a>
+                <a class="btn btn-primary btn-lg" href="pesquisa.php" role="button">Pesquisar</a>
             </p>
             </div>
             </div>
