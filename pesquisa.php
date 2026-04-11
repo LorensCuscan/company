@@ -1,13 +1,3 @@
-<?php
-
-    include "conexao.php";
-
-    $pesquisa = $_POST['busca'] ?? "";
-
-    $sql = "SELECT * FROM pessoas WHERE nome LIKE '%$pesquisa%'";  
-    $dados = mysqli_query($conn, $sql);
-?>
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -19,11 +9,13 @@
 <body>
 
     <?php
-    include_once "conexao.php";
-       $nome = $_GET["nome"] ?? '';
-       $sqL = 'SELECT * FROM pessoas WHERE nome = $nome';
-       mysqli_fetch_assoc($dados);
-       $dados = mysqli_query($conn, $sqL);
+        // 1. Recebimento do termo de busca
+        $pesquisa = $_POST['busca'] ?? "";
+      
+        include "conexao.php";
+      
+        $sql = "SELECT * FROM pessoas WHERE nome LIKE '%$pesquisa%'";  
+        $dados = mysqli_query($conn, $sql);
     ?>
 
     <div class="container mt-5"> 
@@ -45,25 +37,19 @@
                         <th scope="col">Telefone</th>
                         <th scope="col">Email</th>
                         <th scope="col">Data de Nascimento</th>
-                        <th scope="col">Funções</th>
                     </tr>         
                 </thead>
                 <tbody>
                     <?php
-                        if ($dados) {
-                            while ($linha = mysqli_fetch_assoc($dados)) {
-                                echo "<tr>
-                                        <td>{$linha['nome']}</td>
-                                        <td>{$linha['endereco']}</td>
-                                        <td>{$linha['telefone']}</td>
-                                        <td>{$linha['email']}</td>
-                                        <td>{$linha['data_nascimento']}</td>
-                                        <td>
-                                           <a href='cadastro_edit.php?id={$linha['nome']}' class='btn btn-warning btn-sm me-2'>Editar</a>
-                                            <a href='' class='btn btn-danger btn-sm'>Excluir</a>
-                                        </td>
-                                      </tr>";
-                                    }
+                        // 4. O loop agora preenche as linhas da tabela
+                        while ($linha = mysqli_fetch_assoc($dados)) {
+                            echo "<tr>
+                                    <td>{$linha['nome']}</td>
+                                    <td>{$linha['endereco']}</td>
+                                    <td>{$linha['telefone']}</td>
+                                    <td>{$linha['email']}</td>
+                                    <td>{$linha['data_nascimento']}</td>
+                                  </tr>";
                         }
                     ?>
                 </tbody>
