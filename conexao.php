@@ -10,5 +10,9 @@
     else {
         echo "Erro";
     }
+
+    function mostra_data($data) {
+        $data = explode("", $data);
+        }
 ?>
 

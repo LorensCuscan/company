@@ -36,6 +36,7 @@
                         <th scope="col">Telefone</th>
                         <th scope="col">Email</th>
                         <th scope="col">Data de Nascimento</th>
+                        <th scope="col">Funções</th>
                     </tr>         
                 </thead>
                 <tbody>
@@ -48,6 +49,10 @@
                                         <td>{$linha['telefone']}</td>
                                         <td>{$linha['email']}</td>
                                         <td>{$linha['data_nascimento']}</td>
+                                        <td>
+                                            <a href='' class='btn btn-warning btn-sm me-2'>Editar</a>
+                                            <a href='' class='btn btn-danger btn-sm'>Excluir</a>
+                                        </td>
                                       </tr>";
                                     }
                         }
