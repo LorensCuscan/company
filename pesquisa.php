@@ -17,6 +17,15 @@
     <title>Pesquisar</title>
 </head>
 <body>
+
+    <?php
+    include_once "conexao.php";
+       $nome = $_GET["nome"] ?? '';
+       $sqL = 'SELECT * FROM pessoas WHERE nome = $nome';
+       mysqli_fetch_assoc($dados);
+       $dados = mysqli_query($conn, $sqL);
+    ?>
+
     <div class="container mt-5"> 
         <nav class="navbar bg-body-tertiary p-3 rounded">
             <div class="container-fluid">
@@ -50,7 +59,7 @@
                                         <td>{$linha['email']}</td>
                                         <td>{$linha['data_nascimento']}</td>
                                         <td>
-                                            <a href='' class='btn btn-warning btn-sm me-2'>Editar</a>
+                                           <a href='cadastro_edit.php?id={$linha['nome']}' class='btn btn-warning btn-sm me-2'>Editar</a>
                                             <a href='' class='btn btn-danger btn-sm'>Excluir</a>
                                         </td>
                                       </tr>";
