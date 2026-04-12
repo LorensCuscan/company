@@ -40,18 +40,28 @@
                     </tr>         
                 </thead>
                 <tbody>
-                    <?php
-                        // 4. O loop agora preenche as linhas da tabela
-                        while ($linha = mysqli_fetch_assoc($dados)) {
-                            echo "<tr>
-                                    <td>{$linha['nome']}</td>
-                                    <td>{$linha['endereco']}</td>
-                                    <td>{$linha['telefone']}</td>
-                                    <td>{$linha['email']}</td>
-                                    <td>{$linha['data_nascimento']}</td>
-                                  </tr>";
-                        }
-                    ?>
+            <?php
+                while ($linha = mysqli_fetch_assoc($dados)) {
+                  
+                    $data_br = mostra_data($linha['data_nascimento']);
+                    
+                  
+                    $nome_url = urlencode($linha['nome']);
+
+                    echo "<tr>
+                            <td>{$linha['nome']}</td>
+                            <td>{$linha['endereco']}</td>
+                            <td>{$linha['telefone']}</td>
+                            <td>{$linha['email']}</td>
+                            <td>$data_br</td>
+                            <td class='d-flex gap-2'>
+                                <a href='cadastro_edit.php?nome=$nome_url' class='btn btn-success btn-sm'>Editar</a>
+                                
+                                <a href='excluir_script.php?nome=$nome_url' class='btn btn-danger btn-sm' onclick=\"return confirm('Deseja excluir {$linha['nome']}?')\">Excluir</a>
+                            </td>
+                        </tr>";
+                }
+            ?>
                 </tbody>
             </table>
         </div>

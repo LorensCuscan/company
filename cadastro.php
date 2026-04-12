@@ -24,10 +24,8 @@
                         $telefone = $_POST['telefone'];  
                         $email = $_POST['email'];   
                         
-                        // Use o name que está no seu HTML (se mudou para dt_nascimento, mude aqui)
                         $data_nascimento = $_POST['data_nascimento'];
 
-                        // 2. Criando a SQL
                         $sql = "INSERT INTO `pessoas`(`nome`, `endereco`, `telefone`, `email`, `data_nascimento`) 
                                 VALUES ('$nome', '$endereco', '$telefone', '$email', '$data_nascimento')";
 

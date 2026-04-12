@@ -12,7 +12,17 @@
     }
 
     function mostra_data($data) {
-        $data = explode("", $data);
-        }
+    if (!$data) return ""; // Caso a data esteja vazia no banco
+    
+    // O separador correto é o hífen "-" que vem do MySQL
+    $d = explode("-", $data); 
+    
+    // Monta no padrão brasileiro: dia/mes/ano
+    $dt = $d[2] . "/" . $d[1] . "/" . $d[0]; 
+    
+    return $dt;
+}
+
+      
 ?>
 
