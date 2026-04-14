@@ -1,21 +1,9 @@
-<!DOCTYPE html>
-<html lang="pt-br" dir="ltr"> <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+<php
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+include("conexao.php");
 
-    <title>Cadastro</title>
-  </head>
-  <body>
-
-  <?php
-    include("conexao.php");
-
-  // Pega o ID da URL. Se não existir, fica vazio.
   $id = $_GET["id"] ?? '';
 
-  // Se o ID estiver vazio, redireciona para evitar o erro de SQL
   if (empty($id)) {
       header("Location: pesquisa.php");
       exit;
@@ -23,7 +11,7 @@
 
   // Agora a query está segura contra o erro de sintaxe
   $sql = "SELECT * FROM pessoas WHERE cod_pessoa = $id";
-  $dados = mysqli_query($conn, $sql) or die(mysqli_error($conn));
+  $dados = mysqli_query($conn, $sql or die(mysqli_error($conn));
   $linha = mysqli_fetch_assoc($dados);
 ?>
 
@@ -38,6 +26,11 @@
 <body>
     <div class="container mt-5">
         <div class="row">
+            <php
+
+
+
+            ?> </php>
             <div class="col-md-6 offset-md-3">
                 <h1 class="mb-4">Alteração de cadastro</h1>
                 
@@ -80,3 +73,5 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+
+?></php>
