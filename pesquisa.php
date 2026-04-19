@@ -1,3 +1,42 @@
+<?php
+// Controller (carrega dados / prepara variáveis)
+include "conexao.php";
+
+function h($s)
+{
+    return htmlspecialchars((string) $s, ENT_QUOTES, "UTF-8");
+}
+
+function pesquisa_formatar_data($data)
+{
+    if ($data === null || $data === "") {
+        return "-";
+    }
+    $s = substr(str_replace("T", " ", (string) $data), 0, 10);
+    $d = explode("-", $s);
+    if (count($d) !== 3) {
+        return "-";
+    }
+    return $d[2] . "/" . $d[1] . "/" . $d[0];
+}
+
+$pesquisa = trim($_POST["busca"] ?? "");
+$pesquisa_esc = mysqli_real_escape_string($conn, $pesquisa);
+
+$erro_query = "";
+$rows = [];
+
+$sql = "SELECT * FROM `pessoas` WHERE `nome` LIKE '%$pesquisa_esc%' ORDER BY `nome`";
+$dados = mysqli_query($conn, $sql);
+if (!$dados) {
+    $erro_query = mysqli_error($conn);
+} else {
+    while ($linha = mysqli_fetch_assoc($dados)) {
+        $rows[] = $linha;
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -7,39 +46,6 @@
     <title>Pesquisar</title>
 </head>
 <body>
-
-    <?php
-    include "conexao.php";
-
-    $pesquisa = trim($_POST["busca"] ?? "");
-    $pesquisa_esc = mysqli_real_escape_string($conn, $pesquisa);
-
-    function pesquisa_formatar_data($data)
-    {
-        if ($data === null || $data === "") {
-            return "—";
-        }
-        $s = substr(str_replace("T", " ", (string) $data), 0, 10);
-        $d = explode("-", $s);
-        if (count($d) !== 3) {
-            return "—";
-        }
-        return $d[2] . "/" . $d[1] . "/" . $d[0];
-    }
-
-    function h($s)
-    {
-        return htmlspecialchars((string) $s, ENT_QUOTES, "UTF-8");
-    }
-
-    $pk = pessoas_primary_key($conn);
-
-    $sql = "SELECT * FROM `pessoas` WHERE `nome` LIKE '%$pesquisa_esc%' ORDER BY `nome`";
-    $dados = mysqli_query($conn, $sql);
-    if (!$dados) {
-        $erro_query = mysqli_error($conn);
-    }
-    ?>
 
     <div class="container mt-5">
         <nav class="navbar bg-body-tertiary p-3 rounded">
@@ -52,9 +58,9 @@
             </div>
         </nav>
 
-        <?php if (!empty($erro_query)) : ?>
+        <?php if ($erro_query !== ""): ?>
             <div class="alert alert-danger mt-3" role="alert">
-                Erro na consulta: <?php echo h($erro_query); ?>
+                Erro na consulta: <?= h($erro_query) ?>
             </div>
         <?php endif; ?>
 
@@ -71,41 +77,37 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <?php
-                    if (isset($dados) && $dados) {
-                        $count = 0;
-                        while ($linha = mysqli_fetch_assoc($dados)) {
-                            $count++;
+                    <?php if (count($rows) === 0): ?>
+                        <tr>
+                            <td colspan="6" class="text-center text-muted">Nenhum registro encontrado.</td>
+                        </tr>
+                    <?php else: ?>
+                        <?php foreach ($rows as $linha): ?>
+                            <?php
                             $data_br = pesquisa_formatar_data($linha["data_nascimento"] ?? "");
+                            $rid = pessoas_row_id($linha, $conn);
+                            $rid_q = rawurlencode($rid);
+                            $confirmMsg = json_encode("Deseja excluir " . ($linha["nome"] ?? "") . "?");
                             ?>
                             <tr>
-                                <td><?php echo h($linha["nome"] ?? ""); ?></td>
-                                <td><?php echo h($linha["endereco"] ?? ""); ?></td>
-                                <td><?php echo h($linha["telefone"] ?? ""); ?></td>
-                                <td><?php echo h($linha["email"] ?? ""); ?></td>
-                                <td><?php echo h($data_br); ?></td>
+                                <td><?= h($linha["nome"] ?? "") ?></td>
+                                <td><?= h($linha["endereco"] ?? "") ?></td>
+                                <td><?= h($linha["telefone"] ?? "") ?></td>
+                                <td><?= h($linha["email"] ?? "") ?></td>
+                                <td><?= h($data_br) ?></td>
                                 <td class="d-flex flex-wrap gap-2">
-                                    <?php
-                                    $rid = pessoas_row_id($linha, $conn);
-                                    if ($rid === "") :
-                                        ?>
+                                    <?php if ($rid === ""): ?>
                                         <span class="text-muted small">Sem ID</span>
-                                    <?php else : ?>
-                                        <a href="cadastro_edit.php?id=<?php echo h(rawurlencode($rid)); ?>"
-                                           class="btn btn-success btn-sm">Editar</a>
-                                        <a href="excluir_script.php?id=<?php echo h(rawurlencode($rid)); ?>"
+                                    <?php else: ?>
+                                        <a href="cadastro_edit.php?id=<?= h($rid_q) ?>" class="btn btn-success btn-sm">Editar</a>
+                                        <a href="excluir_script.php?id=<?= h($rid_q) ?>"
                                            class="btn btn-danger btn-sm"
-                                           onclick="return confirm(<?php echo json_encode("Deseja excluir " . ($linha["nome"] ?? "") . "?"); ?>)">Excluir</a>
+                                           onclick='return confirm(<?= $confirmMsg ?>)'>Excluir</a>
                                     <?php endif; ?>
                                 </td>
                             </tr>
-                            <?php
-                        }
-                        if ($count === 0) {
-                            echo '<tr><td colspan="6" class="text-center text-muted">Nenhum registro encontrado.</td></tr>';
-                        }
-                    }
-                    ?>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
                 </tbody>
             </table>
         </div>
