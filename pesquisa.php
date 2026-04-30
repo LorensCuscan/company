@@ -100,7 +100,7 @@ if (!$dados) {
                                         <span class="text-muted small">Sem ID</span>
                                     <?php else: ?>
                                         <a href="cadastro_edit.php?id=<?= h($rid_q) ?>" class="btn btn-success btn-sm">Editar</a>
-                                        <a href="excluir_script.php?id=<?= h($rid_q) ?>"
+                                        <a href="apagar.php?id=<?= h($rid_q) ?>"
                                            class="btn btn-danger btn-sm"
                                            onclick='return confirm(<?= $confirmMsg ?>)'>Excluir</a>
                                     <?php endif; ?>
